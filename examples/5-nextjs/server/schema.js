@@ -1,25 +1,26 @@
-const {store} = require('./store')
+const { store } = require("./store")
 
 const typeDefs = `
   type Query {
-    todos: [Todo],
-    doneTodos: [Todo],
+    todos: [Todo]!,
+    doneTodos: [Todo]!,
     user(id: ID!): User,
-    users: [User],
+    users: [User]!,
   }
   type Mutation {
     toggleTodo(id: ID!): Todo,
   }
   type Todo {
-    id: ID,
-    text: String,
-    done: Boolean,
+    id: ID!,
+    text: String!,
+    done: Boolean!,
     assignee: User,
   }
   type User {
-    id: ID,
-    name: String,
-    likes: [String],
+    id: ID!,
+    name: String!,
+    likes: [String]!,
+    unobservedProp: String
   }
 `
 
@@ -46,13 +47,18 @@ const resolvers = {
     }
   },
   Todo: {
-    assignee: (todo) => {
+    assignee: todo => {
       return store.users.find(user => user.id === todo.assignee)
     }
   },
+  User: {
+    unobservedProp: user => {
+      return "foo"
+    }
+  }
 }
 
 module.exports = {
   typeDefs,
-  resolvers,
+  resolvers
 }

@@ -1,9 +1,17 @@
 # CHANGELOG
 
-## 0.4.2 (not yet released)
+## 0.6.0
+
+- add a new `ModelBase` file that all models extend that can be edited. [#106](https://github.com/mobxjs/mst-gql/pull/106) - [zenflow](https://github.com/zenflow)
+- CLI alert on unexpected files in `models` folder. [#113](https://github.com/mobxjs/mst-gql/pull/113) - [RXminuS](https://github.com/RXminuS)
+- Use undefined to mean not loaded, use null to mean gql null [#102](https://github.com/mobxjs/mst-gql/pull/102) - [zenflow](https://github.com/zenflow)
+
+## 0.5.0
 
 - Update example 5. [#93](https://github.com/mobxjs/mst-gql/pull/93) thanks [zenflow](https://github.com/zenflow)!
 - Stop generating input types when format is `js`. [#96](https://github.com/mobxjs/mst-gql/pull/96)
+- Drop the `raw` option for queries [#103](https://github.com/mobxjs/mst-gql/pull/103) - [zenflow](https://github.com/zenflow)
+- Deduplicate identical concurrent query requests [#100](https://github.com/mobxjs/mst-gql/pull/100) - [zenflow](https://github.com/zenflow)
 
 ## 0.4.1
 

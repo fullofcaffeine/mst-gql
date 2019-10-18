@@ -3,9 +3,7 @@ import { selectFromTodo, useQuery } from "../src/models"
 import { UserPreview } from "./users"
 
 const todoSelector = selectFromTodo()
-  .text
-  .done
-  .assignee()
+  .text.done.assignee()
   .toString()
 
 const TodosList = observer(({ todos }) => {
@@ -17,11 +15,15 @@ const TodosList = observer(({ todos }) => {
             {todo.text}
           </span>
           &emsp;
-          <button onClick={todo.toggle}>
-            toggle
-          </button>
+          <button onClick={todo.toggle}>toggle</button>
           &emsp;
-          Assignee: <UserPreview userId={todo.assignee.id}/>
+          {todo.assignee ? (
+            <>
+              Assignee: <UserPreview userId={todo.assignee.id} />
+            </>
+          ) : (
+            <>Unassigned</>
+          )}
         </li>
       ))}
     </ul>
@@ -36,8 +38,12 @@ export const AllTodosView = observer(() => {
   if (!data) return "Loading..."
   return (
     <>
-      {data && <TodosList todos={data.todos}/>}
-      {loading ? "Loading..." : <button onClick={query!.refetch}>Refetch</button>}
+      {data && <TodosList todos={data.todos} />}
+      {loading ? (
+        "Loading..."
+      ) : (
+        <button onClick={query!.refetch}>Refetch</button>
+      )}
     </>
   )
 })
@@ -50,8 +56,12 @@ export const DoneTodosView = observer(() => {
   if (!data) return "Loading..."
   return (
     <>
-      {data && <TodosList todos={data.doneTodos}/>}
-      {loading ? "Loading..." : <button onClick={query!.refetch}>Refetch</button>}
+      {data && <TodosList todos={data.doneTodos} />}
+      {loading ? (
+        "Loading..."
+      ) : (
+        <button onClick={query!.refetch}>Refetch</button>
+      )}
     </>
   )
 })

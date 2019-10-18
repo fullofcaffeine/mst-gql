@@ -2,7 +2,8 @@
 /* eslint-disable */
 
 import { types } from "mobx-state-tree"
-import { MSTGQLObject, MSTGQLRef, QueryBuilder } from "mst-gql"
+import { MSTGQLRef, QueryBuilder } from "mst-gql"
+import { ModelBase } from "./ModelBase"
 import { MissionModel } from "./MissionModel"
 import { MissionModelSelector } from "./MissionModel.base"
 import { RocketModel } from "./RocketModel"
@@ -13,15 +14,15 @@ import { RocketModelSelector } from "./RocketModel.base"
  * LaunchBase
  * auto generated base class for the model LaunchModel.
  */
-export const LaunchModelBase = MSTGQLObject
+export const LaunchModelBase = ModelBase
   .named('Launch')
   .props({
     __typename: types.optional(types.literal("Launch"), "Launch"),
     id: types.identifier,
-    site: types.maybeNull(types.string),
-    mission: types.maybeNull(types.late(() => MissionModel)),
-    rocket: types.maybeNull(MSTGQLRef(types.late(() => RocketModel))),
-    isBooked: types.maybeNull(types.boolean),
+    site: types.union(types.undefined, types.null, types.string),
+    mission: types.union(types.undefined, types.null, types.late(() => MissionModel)),
+    rocket: types.union(types.undefined, types.null, MSTGQLRef(types.late(() => RocketModel))),
+    isBooked: types.union(types.undefined, types.boolean),
   })
   .views(self => ({
     get store() {

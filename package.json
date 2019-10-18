@@ -1,6 +1,6 @@
 {
   "name": "mst-gql",
-  "version": "0.4.1",
+  "version": "0.6.0",
   "description": "Bindings for mobx-state-tree and GraphQL",
   "author": "Michel Weststrate",
   "keywords": [
@@ -34,7 +34,7 @@
     "test": "jest test && cd examples/2-scaffolding && yarn && yarn start",
     "watch": "jest test --watch",
     "build": "microbundle --no-compress --external mobx,mobx-react,mobx-state-tree,graphql-tag,graphql,react,react-dom,graphql-request",
-    "format": "prettier --write ./**/*"
+    "format": "prettier --write '**/*'"
   },
   "husky": {
     "hooks": {

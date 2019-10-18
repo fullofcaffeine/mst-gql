@@ -2,18 +2,20 @@
 /* eslint-disable */
 
 import { types } from "mobx-state-tree"
-import { MSTGQLObject, QueryBuilder } from "mst-gql"
+import { QueryBuilder } from "mst-gql"
+import { ModelBase } from "./ModelBase"
 
 
 /**
  * MissionBase
  * auto generated base class for the model MissionModel.
  */
-export const MissionModelBase = MSTGQLObject
+export const MissionModelBase = ModelBase
   .named('Mission')
   .props({
     __typename: types.optional(types.literal("Mission"), "Mission"),
-    name: types.maybeNull(types.string),
+    name: types.union(types.undefined, types.null, types.string),
+    missionPatch: types.union(types.undefined, types.null, types.string),
   })
   .views(self => ({
     get store() {
@@ -23,9 +25,10 @@ export const MissionModelBase = MSTGQLObject
 
 export class MissionModelSelector extends QueryBuilder {
   get name() { return this.__attr(`name`) }
+  get missionPatch() { return this.__attr(`missionPatch`) }
 }
 export function selectFromMission() {
   return new MissionModelSelector()
 }
 
-export const missionModelPrimitives = selectFromMission().name
+export const missionModelPrimitives = selectFromMission().name.missionPatch

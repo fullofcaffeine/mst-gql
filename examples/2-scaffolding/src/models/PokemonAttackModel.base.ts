@@ -3,7 +3,8 @@
 /* tslint:disable */
 
 import { types } from "mobx-state-tree"
-import { MSTGQLObject, MSTGQLRef, QueryBuilder } from "mst-gql"
+import { MSTGQLRef, QueryBuilder } from "mst-gql"
+import { ModelBase } from "./ModelBase"
 import { AttackModel } from "./AttackModel"
 import { AttackModelSelector } from "./AttackModel.base"
 import { RootStoreType } from "./index"
@@ -15,14 +16,14 @@ import { RootStoreType } from "./index"
  *
  * Represents a Pokémon's attack types
  */
-export const PokemonAttackModelBase = MSTGQLObject
+export const PokemonAttackModelBase = ModelBase
   .named('PokemonAttack')
   .props({
     __typename: types.optional(types.literal("PokemonAttack"), "PokemonAttack"),
     /** The fast attacks of this Pokémon */
-    fast: types.optional(types.array(MSTGQLRef(types.late(() => AttackModel))), []),
+    fast: types.union(types.undefined, types.null, types.array(types.union(types.null, MSTGQLRef(types.late(() => AttackModel))))),
     /** The special attacks of this Pokémon */
-    special: types.optional(types.array(MSTGQLRef(types.late(() => AttackModel))), []),
+    special: types.union(types.undefined, types.null, types.array(types.union(types.null, MSTGQLRef(types.late(() => AttackModel))))),
   })
   .views(self => ({
     get store() {

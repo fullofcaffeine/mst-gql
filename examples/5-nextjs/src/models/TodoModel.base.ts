@@ -3,7 +3,8 @@
 /* tslint:disable */
 
 import { types } from "mobx-state-tree"
-import { MSTGQLObject, MSTGQLRef, QueryBuilder } from "mst-gql"
+import { MSTGQLRef, QueryBuilder } from "mst-gql"
+import { ModelBase } from "./ModelBase"
 import { UserModel } from "./UserModel"
 import { UserModelSelector } from "./UserModel.base"
 import { RootStoreType } from "./index"
@@ -13,14 +14,14 @@ import { RootStoreType } from "./index"
  * TodoBase
  * auto generated base class for the model TodoModel.
  */
-export const TodoModelBase = MSTGQLObject
+export const TodoModelBase = ModelBase
   .named('Todo')
   .props({
     __typename: types.optional(types.literal("Todo"), "Todo"),
     id: types.identifier,
-    text: types.maybeNull(types.string),
-    done: types.maybeNull(types.boolean),
-    assignee: types.maybeNull(MSTGQLRef(types.late(() => UserModel))),
+    text: types.union(types.undefined, types.string),
+    done: types.union(types.undefined, types.boolean),
+    assignee: types.union(types.undefined, types.null, MSTGQLRef(types.late(() => UserModel))),
   })
   .views(self => ({
     get store() {

@@ -2,7 +2,8 @@
 /* eslint-disable */
 
 import { types } from "mobx-state-tree"
-import { MSTGQLObject, QueryBuilder } from "mst-gql"
+import { QueryBuilder } from "mst-gql"
+import { ModelBase } from "./ModelBase"
 import { BookModel } from "./BookModel"
 import { MovieModel } from "./MovieModel"
 import { SearchItemModelSelector } from "./SearchItemModelSelector"
@@ -12,12 +13,12 @@ import { SearchItemModelSelector } from "./SearchItemModelSelector"
  * SearchResultBase
  * auto generated base class for the model SearchResultModel.
  */
-export const SearchResultModelBase = MSTGQLObject
+export const SearchResultModelBase = ModelBase
   .named('SearchResult')
   .props({
     __typename: types.optional(types.literal("SearchResult"), "SearchResult"),
-    inputQuery: types.maybeNull(types.string),
-    items: types.optional(types.array(types.union(types.late(() => MovieModel), types.late(() => BookModel))), []),
+    inputQuery: types.union(types.undefined, types.string),
+    items: types.union(types.undefined, types.array(types.union(types.null, types.union(types.late(() => MovieModel), types.late(() => BookModel))))),
   })
   .views(self => ({
     get store() {

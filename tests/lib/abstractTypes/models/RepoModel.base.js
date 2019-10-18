@@ -2,7 +2,8 @@
 /* eslint-disable */
 
 import { types } from "mobx-state-tree"
-import { MSTGQLObject, QueryBuilder } from "mst-gql"
+import { QueryBuilder } from "mst-gql"
+import { ModelBase } from "./ModelBase"
 import { OrganizationModel } from "./OrganizationModel"
 import { OwnerModelSelector } from "./OwnerModelSelector"
 import { UserModel } from "./UserModel"
@@ -12,12 +13,12 @@ import { UserModel } from "./UserModel"
  * RepoBase
  * auto generated base class for the model RepoModel.
  */
-export const RepoModelBase = MSTGQLObject
+export const RepoModelBase = ModelBase
   .named('Repo')
   .props({
     __typename: types.optional(types.literal("Repo"), "Repo"),
     id: types.identifier,
-    owner: types.maybeNull(types.union(types.late(() => UserModel), types.late(() => OrganizationModel))),
+    owner: types.union(types.undefined, types.null, types.union(types.late(() => UserModel), types.late(() => OrganizationModel))),
   })
   .views(self => ({
     get store() {
