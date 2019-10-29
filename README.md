@@ -1,4 +1,4 @@
-# mst-gql
+# mst-gql foo
 
 Bindings for mobx-state-tree and GraphQL
 

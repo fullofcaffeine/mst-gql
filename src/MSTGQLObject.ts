@@ -1,6 +1,7 @@
 import {
   types,
   getParent,
+  getRoot,
   IAnyModelType,
   resolveIdentifier,
   IReferenceType
@@ -40,7 +41,7 @@ export const MSTGQLObject = types.model("MSTGQLObject").extend(self => {
   let store: StoreType
 
   function getStore(): StoreType {
-    return store || (store = getParent(self, 2))
+    return store || (store = getRoot(self))
   }
 
   return {
